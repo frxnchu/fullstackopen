@@ -1,0 +1,35 @@
+sequenceDiagram
+
+    participant browser
+    participant server
+
+    Note over browser: El usuario escribe una nota en el campo de texto
+    Note over browser: y hace clic en el botón "Save"
+
+    browser->>server: POST https://studies.cs.helsinki.fi/exampleapp/new_note
+    activate server
+    Note right of browser: Se envía el contenido de la nota como formulario
+    server-->>browser: 302 Redirect to /notes
+    deactivate server
+
+    browser->>server: GET https://studies.cs.helsinki.fi/exampleapp/notes
+    activate server
+    server-->>browser: HTML document
+    deactivate server
+
+    browser->>server: GET https://studies.cs.helsinki.fi/exampleapp/main.css
+    activate server
+    server-->>browser: CSS file
+    deactivate server
+
+    browser->>server: GET https://studies.cs.helsinki.fi/exampleapp/main.js
+    activate server
+    server-->>browser: JavaScript file
+    deactivate server
+
+    browser->>server: GET https://studies.cs.helsinki.fi/exampleapp/data.json
+    activate server
+    server-->>browser: Lista actualizada de notas en formato JSON
+    deactivate server
+
+    Note right of browser: El navegador renderiza las notas, incluyendo la nueva
